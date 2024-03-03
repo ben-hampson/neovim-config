@@ -1,1 +1,3 @@
 # neovim-config
+
+`~/.config/nvim/`
