@@ -6,7 +6,8 @@ return
     dependencies = {
       "rcarriga/nvim-dap-ui",
       "mfussenegger/nvim-dap-python",
-      'theHamsta/nvim-dap-virtual-text' -- Show variable values and types inline.
+      "theHamsta/nvim-dap-virtual-text", -- Show variable values and types inline.
+      "nvim-neotest/nvim-nio",
     },
     config = function()
       require("dapui").setup(
@@ -175,7 +176,8 @@ return
     requires = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
-      "antoinemadec/FixCursorHold.nvim"
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-neotest/nvim-nio"
     },
     config = function()
       require("neotest").setup({
