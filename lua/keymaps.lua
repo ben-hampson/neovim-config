@@ -13,7 +13,6 @@ vim.api.nvim_set_keymap('n', '<leader>j', '<Nop>', {noremap = true})
 -- Keymaps for better default experience
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('i', 'jk', '<esc>', { silent = true })
--- vim.keymap.set('v', 'jk', '<esc>', { silent = true })
 vim.keymap.set('n', 'H', '^', { silent = true })
 vim.keymap.set('n', 'L', '$', { silent = true })
 
