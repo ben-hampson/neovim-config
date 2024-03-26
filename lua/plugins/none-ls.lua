@@ -11,8 +11,7 @@ return {
 					-- https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md
 
 					-- Python
-					null_ls.builtins.diagnostics.ruff,
-					null_ls.builtins.formatting.ruff,
+					null_ls.builtins.diagnostics.mypy,
 				},
 			})
 		end,
