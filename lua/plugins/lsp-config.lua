@@ -152,7 +152,10 @@ return {
       -- Format when saving buffer
       vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
         callback = function()
-          vim.lsp.buf.format()
+          local clients = vim.lsp.get_active_clients()
+          if #clients > 0 then
+            vim.lsp.buf.format()
+          end
         end
       })
 
