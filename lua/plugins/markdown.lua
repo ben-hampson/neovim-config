@@ -39,8 +39,6 @@ return {
     opts = {
     },
     config = function()
-      vim.opt_local.conceallevel = 2
-
       require('obsidian').setup({
         -- A list of workspace names, paths, and configuration overrides.
         -- If you use the Obsidian app, the 'path' of a workspace should generally be
@@ -68,7 +66,7 @@ return {
 
         daily_notes = {
           -- Optional, if you keep daily notes in a separate directory.
-          folder = "dailies",
+          folder = "journal",
           -- Optional, if you want to change the date format for the ID of daily notes.
           date_format = "%Y-%m-%d",
           -- Optional, if you want to change the date format of the default alias of daily notes.

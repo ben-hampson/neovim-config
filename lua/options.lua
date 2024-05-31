@@ -53,3 +53,6 @@ vim.cmd("set nofoldenable") -- Disable folding at startup.
 vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
+
+-- Set conceal level for the sake of mkdnflow.nvim and obsidian.nvim
+vim.opt_local.conceallevel = 2
