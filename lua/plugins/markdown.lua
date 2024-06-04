@@ -6,10 +6,10 @@ return {
     'jakewvincent/mkdnflow.nvim',
     config = function()
       require('mkdnflow').setup({
-        mappings = {
-          MkdnEnter = { { 'i', 'n', 'v' }, '<CR>' },
-          --   MkdnToggleToDo = { { 'n', 'v' }, '<C-k>' },
-        },
+        -- mappings = {
+        --   MkdnEnter = { { 'i', 'n', 'v' }, '<CR>' },
+        --   --   MkdnToggleToDo = { { 'n', 'v' }, '<C-k>' },
+        -- },
         modules = {
           bib = false,
           buffers = false,
@@ -58,7 +58,7 @@ return {
         -- dir = "~/vaults/work",
 
         -- Optional, if you keep notes in a specific subdirectory of your vault.
-        notes_subdir = "notes",
+        -- notes_subdir = "notes",
 
         -- Optional, set the log level for obsidian.nvim. This is an integer corresponding to one of the log
         -- levels defined by "vim.log.levels.*".
@@ -66,7 +66,7 @@ return {
 
         daily_notes = {
           -- Optional, if you keep daily notes in a separate directory.
-          folder = "journal",
+          folder = "daily",
           -- Optional, if you want to change the date format for the ID of daily notes.
           date_format = "%Y-%m-%d",
           -- Optional, if you want to change the date format of the default alias of daily notes.
