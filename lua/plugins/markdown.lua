@@ -17,8 +17,8 @@ return {
           cursor = false,
           folds = false,
           links = false,
-          lists = true, -- lists and maps seem to enable continuing a checklist when pressing Enter.
-          maps = true,
+          lists = false, -- lists and maps seem to enable continuing a checklist when pressing Enter.
+          maps = false,
           paths = false,
           tables = false,
           yaml = false,
@@ -94,7 +94,7 @@ return {
             opts = { noremap = false, expr = true, buffer = true },
           },
           -- Toggle check-boxes.
-          ["<leader>ch"] = {
+          ["<leader>oh"] = {
             action = function()
               return require("obsidian").util.toggle_checkbox()
             end,
@@ -105,7 +105,7 @@ return {
             action = function()
               return require("obsidian").util.smart_action()
             end,
-            opts = { buffer = true, expr = true },
+            opts = { buffer = true, expr = true, desc = "obsidian.nvim - Smart Action - Create checkbox, toggle checkbox, or follow link." },
           }
         },
 
@@ -334,6 +334,19 @@ return {
         },
       }
       )
+      vim.keymap.set("v", "<leader>ol", ':ObsidianLinkNew<CR>',
+        { silent = true, noremap = true, desc = "[O]bsidian [L]ink" })
+
+      vim.keymap.set("n", "<leader>or", ':ObsidianYesterday<CR>',
+        { silent = true, noremap = true, desc = "[O]bsidian Yesterday" })
+
+      vim.keymap.set("n", "<leader>ot", ':ObsidianToday<CR>',
+        { silent = true, noremap = true, desc = "[O]bsidian [T]oday" })
+
+      vim.keymap.set("n", "<leader>oy", ':ObsidianTomorrow<CR>',
+        { silent = true, noremap = true, desc = "[O]bsidian Tomorrow" })
+
+      vim.o.conceallevel = 2 -- Hide links in normal mode, show links in insert mode.
     end
   }
 }
