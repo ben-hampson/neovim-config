@@ -11,6 +11,28 @@ return {
       require('luasnip.loaders.from_vscode').lazy_load()
       luasnip.config.setup {}
 
+      local function get_sources()
+        if vim.bo.filetype == 'markdown' then
+          return { { name = 'obsidian', keyword_length = 5, max_item_count = 10 } }
+        else
+          -- The order you list them here ranks the priority in the dropdown
+          return {
+            { name = 'nvim_lsp', keyword_length = 0, max_item_count = 10 },
+            { name = 'luasnip',  keyword_length = 3, max_item_count = 10 },
+            { name = 'nvim_lua', keyword_length = 3, max_item_count = 10 },
+            { name = 'path',     keyword_length = 3, max_item_count = 10 },
+            { name = 'buffer',   keyword_length = 5, max_item_count = 10 },
+          }
+        end
+      end
+
+      -- get_sources() every time we open a buffer to get the right list of sources.
+      vim.api.nvim_create_autocmd('BufEnter', {
+        callback = function()
+          cmp.setup.buffer { sources = get_sources() }
+        end
+      })
+
       cmp.setup {
         snippet = {
           expand = function(args)
@@ -52,14 +74,7 @@ return {
             end
           end, { 'i', 's' }),
         },
-        sources = {
-          -- The order you list them here ranks the priority in the dropdown
-          { name = 'nvim_lsp', keyword_length = 0, max_item_count=10 },
-          { name = 'luasnip',  keyword_length = 3 , max_item_count=10 },
-          { name = 'nvim_lua', keyword_length = 3 , max_item_count=10 },
-          { name = 'path',     keyword_length = 3 , max_item_count=10 },
-          { name = 'buffer',   keyword_length = 5 , max_item_count=10 },
-        },
+        sources = get_sources(),
         window = {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
@@ -75,6 +90,7 @@ return {
               luasnip = "[LuaSnip]",
               nvim_lua = "[Lua]",
               path = "[Path]",
+              obsidian = "[Obsidian]",
             })
           }
         },
