@@ -13,7 +13,8 @@ return {
 
       local function get_sources()
         if vim.bo.filetype == 'markdown' then
-          return { { name = 'obsidian', keyword_length = 5, max_item_count = 10 } }
+          -- return { { name = 'obsidian', keyword_length = 5, max_item_count = 10 } }
+          return {}
         else
           -- The order you list them here ranks the priority in the dropdown
           return {

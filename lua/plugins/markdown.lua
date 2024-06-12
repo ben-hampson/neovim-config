@@ -1,5 +1,36 @@
 -- mkdnflow is just for ensuring hitting 'Enter' when in a list in insert mode creates a new list item below.
 -- All other markdown functionality is handled by obsidian.nvim below.
+local function createNoteWithDefaultTemplate()
+  local TEMPLATE_FILENAME = "meeting"
+  local obsidian = require("obsidian").get_client()
+  local utils = require("obsidian.util")
+
+  -- prevent Obsidian.nvim from injecting it's own frontmatter table
+  obsidian.opts.disable_frontmatter = true
+
+  -- prompt for note title
+  -- @see: borrowed from obsidian.command.new
+  local note
+  local title = utils.input("Enter title or path (optional): ")
+  if not title then
+    return
+  elseif title == "" then
+    title = nil
+  end
+
+  note = obsidian:create_note({ title = title, no_write = false, template = TEMPLATE_FILENAME })
+
+  if not note then
+    return
+  end
+  -- open new note in a buffer
+  obsidian:open_note(note, { sync = true })
+  -- -- NOTE: make sure the template folder is configured in Obsidian.nvim opts
+  -- obsidian:write_note_to_buffer(note, { template = TEMPLATE_FILENAME })
+  -- -- hack: delete empty lines before frontmatter; template seems to be injected at line 2
+  -- vim.api.nvim_buf_set_lines(0, 0, 1, false, {})
+end
+
 return {
   {
 
@@ -70,9 +101,9 @@ return {
           -- Optional, if you want to change the date format for the ID of daily notes.
           date_format = "%Y-%m-%d",
           -- Optional, if you want to change the date format of the default alias of daily notes.
-          alias_format = "%B %-d, %Y",
+          alias_format = "%A %-d %B %Y",
           -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
-          template = nil
+          template = "daily.md"
         },
 
         -- Optional, completion of wiki links, local markdown links, and tags using nvim-cmp.
@@ -118,9 +149,7 @@ return {
         ---@param title string|?
         ---@return string
         note_id_func = function(title)
-          -- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
-          -- In this case a note with the title 'My new note' will be given an ID that looks
-          -- like '1657296016-my-new-note', and therefore the file name '1657296016-my-new-note.md'
+          -- Create file name
           local suffix = ""
           if title ~= nil then
             -- If title is given, transform it into valid file name.
@@ -131,7 +160,8 @@ return {
               suffix = suffix .. string.char(math.random(65, 90))
             end
           end
-          return tostring(os.time()) .. "-" .. suffix
+          -- return tostring(os.time()) .. "-" .. suffix
+          return suffix
         end,
 
         -- Optional, customize how note file names are generated given the ID, target directory, and title.
@@ -334,9 +364,6 @@ return {
         },
       }
       )
-      vim.keymap.set("v", "<leader>ol", ':ObsidianLinkNew<CR>',
-        { silent = true, noremap = true, desc = "[O]bsidian [L]ink" })
-
       vim.keymap.set("n", "<leader>or", ':ObsidianYesterday<CR>',
         { silent = true, noremap = true, desc = "[O]bsidian Yesterday" })
 
@@ -345,6 +372,17 @@ return {
 
       vim.keymap.set("n", "<leader>oy", ':ObsidianTomorrow<CR>',
         { silent = true, noremap = true, desc = "[O]bsidian Tomorrow" })
+
+      vim.keymap.set("v", "<leader>ole", ':ObsidianLink<CR>',
+        { silent = true, noremap = true, desc = "[O]bsidian [L]ink visual selection to an [E]xisting note / path" })
+
+      vim.keymap.set("v", "<leader>oln", ':ObsidianLinkNew<CR>',
+        { silent = true, noremap = true, desc = "[O]bsidian [L]ink [N]ew" })
+
+      vim.keymap.set("v", "<leader>oe", ':ObsidianExtractNote<CR>',
+        { silent = true, noremap = true, desc = "[O]bsidian [E]xtract to new note" })
+
+      vim.keymap.set("n", "<leader>nn", createNoteWithDefaultTemplate, { desc = "[N]ew Obsidian [N]ote" })
 
       vim.o.conceallevel = 2 -- Hide links in normal mode, show links in insert mode.
     end
