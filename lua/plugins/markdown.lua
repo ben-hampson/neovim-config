@@ -45,16 +45,29 @@ return {
           bib = false,
           buffers = false,
           conceal = false,
-          cursor = false,
+          cursor = true, -- for increasing / decreasing headers
           folds = false,
-          links = false,
-          lists = false, -- lists and maps seem to enable continuing a checklist when pressing Enter.
-          maps = false,
-          paths = false,
+          links = true,
+          lists = true, -- lists and maps seem to enable continuing a checklist when pressing Enter.
+          maps = true,
+          paths = true,
           tables = false,
           yaml = false,
           cmp = false
         },
+        mappings = {
+          -- MkdnEnter = { { 'n', 'v' }, '<CR>' }, -- This monolithic command has the aforementioned
+          -- insert-mode-specific behavior and also will trigger row jumping in tables. Outside
+          -- of lists and tables, it behaves as <CR> normally does.
+          -- MkdnNewListItem = {'i', '<CR>'} -- Use this command instead if you only want <CR> in
+          -- insert mode to add a new list item (and behave as usual outside of lists).
+          MkdnEnter = false, -- Let obsidian.nvim handle smart enter in normal mode: toggle checkboxes, follow links.
+          MkdnNewListItem = { 'i', '<CR>' },
+          MkdnIncreaseHeading = { 'n', '+' },
+          MkdnDecreaseHeading = { 'n', '-' },
+          MkdnTab = { 'n', '<Tab>' },
+          MkdnSTab = { 'n', '<S-Tab>' },
+        }
       })
       vim.api.nvim_create_autocmd("BufLeave", { pattern = "*.md", command = "silent! w" })
     end
