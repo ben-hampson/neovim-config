@@ -1,9 +1,10 @@
 return {
-  {'akinsho/toggleterm.nvim',
+  {
+    'akinsho/toggleterm.nvim',
     version = "*",
     config = {
       size = 120,
-      open_mapping = [[fd]],
+      open_mapping = [[<leader>t]],
       hide_numbers = true,
       shade_filetypes = {},
       shade_terminals = true,
@@ -15,12 +16,12 @@ return {
       close_on_exit = false,
       shell = vim.o.shell,
       float_opts = {
-          border = "curved",
-          winblend = 0,
-          highlights = {
-              border = "Normal",
-              background = "Normal",
-          },
+        border = "curved",
+        winblend = 0,
+        highlights = {
+          border = "Normal",
+          background = "Normal",
+        },
       },
     }
   }
