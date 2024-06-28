@@ -4,7 +4,7 @@ return {
     version = "*",
     config = {
       size = 120,
-      open_mapping = [[<leader>t]],
+      open_mapping = [[<leader>tt]],
       hide_numbers = true,
       shade_filetypes = {},
       shade_terminals = true,
