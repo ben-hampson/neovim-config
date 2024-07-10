@@ -10,7 +10,6 @@ local function createNoteWithDefaultTemplate()
 
   -- prompt for note title
   -- @see: borrowed from obsidian.command.new
-  local note
   local title = utils.input("Enter title or path (optional): ")
   if not title then
     return
@@ -18,7 +17,7 @@ local function createNoteWithDefaultTemplate()
     title = nil
   end
 
-  note = obsidian:create_note({ title = title, no_write = false, template = TEMPLATE_FILENAME })
+  local note = obsidian:create_note({ title = title, no_write = false, template = TEMPLATE_FILENAME })
 
   if not note then
     return
@@ -29,6 +28,65 @@ local function createNoteWithDefaultTemplate()
   -- obsidian:write_note_to_buffer(note, { template = TEMPLATE_FILENAME })
   -- -- hack: delete empty lines before frontmatter; template seems to be injected at line 2
   -- vim.api.nvim_buf_set_lines(0, 0, 1, false, {})
+end
+
+local function createJiraTicketNote()
+  local obsidian = require("obsidian").get_client()
+  local utils = require("obsidian.util")
+  local jira_domain = os.getenv("JIRA_DOMAIN")
+
+  local base_url = "https://" .. jira_domain .. "/browse/PPO-"
+  local ppo_num = utils.input("Ticket number: ")
+
+  local full_url = base_url .. ppo_num
+
+  local ticket_name = fetch_field_from_jira(ppo_num, "summary")
+  local time_code = fetch_field_from_jira(ppo_num, "customfield_23252")[1]
+  local time_code = string.sub(time_code, 1, 6)
+
+
+  -- Create note from template
+  local TEMPLATE_FILENAME = "jira-ticket"
+
+  local full_title = "PPO-" .. ppo_num .. " - " .. ticket_name
+
+  -- prevent Obsidian.nvim from injecting it's own frontmatter table
+  obsidian.opts.disable_frontmatter = true
+
+  note = obsidian:create_note({ title = full_title, no_write = false, template = TEMPLATE_FILENAME })
+  note.add_field(note, "url", full_url)
+  note.add_field(note, "time_code", time_code)
+  note.add_alias(note, full_title)
+  note.add_tag(note, "jira-ticket")
+  note.save(note, {
+    update_content = function()
+      return { "", "# " .. full_title }
+    end
+  })
+
+  obsidian:open_note(note, { sync = true })
+end
+
+function fetch_field_from_jira(ppo_num, field)
+  local jiraPAT = os.getenv("JIRA_PAT")
+  local auth_string = "Bearer " .. jiraPAT
+
+  local curl = require('plenary.curl')
+
+  local base_url = "https://jira.finods.com/rest/api/2/issue/PPO-"
+  local full_url = base_url .. ppo_num
+
+  local response = curl.get(full_url, {
+    headers = {
+      Authorization = auth_string
+    }
+  })
+
+  local data = vim.json.decode(response.body)
+
+  local result = data.fields[field]
+
+  return result
 end
 
 return {
@@ -396,6 +454,13 @@ return {
         { silent = true, noremap = true, desc = "[O]bsidian [E]xtract to new note" })
 
       vim.keymap.set("n", "<leader>nn", createNoteWithDefaultTemplate, { desc = "[N]ew Obsidian [N]ote" })
+
+      vim.keymap.set("n", "<leader>nj", createJiraTicketNote, { desc = "[N]ew Obsidian [J]ira Ticket Note" })
+
+      vim.keymap.set("n", "<leader>oo", ':ObsidianQuickSwitch<CR>', { desc = "[O]bsidian [O]pen (Quick Switcher)" })
+
+      vim.keymap.set("n", "<leader>op", ":ObsidianFollowLink vsplit<CR>",
+        { desc = "Obsidian - Open Link in vsplit" })
 
       vim.o.conceallevel = 2 -- Hide links in normal mode, show links in insert mode.
     end
