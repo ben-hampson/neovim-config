@@ -22,6 +22,7 @@ return {
         "ruff_lsp", -- Python: Used by none-ls -> Formatting, linting
         "lua_ls",
         "terraformls",
+        "yamlls",
       },
     }
   },
@@ -101,6 +102,9 @@ return {
         }
       })
       lspconfig.terraformls.setup({
+        capabilities = capabilities
+      })
+      lspconfig.yamlls.setup({
         capabilities = capabilities
       })
 
