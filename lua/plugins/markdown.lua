@@ -308,8 +308,14 @@ return {
         ---@param url string
         follow_url_func = function(url)
           -- Open the URL in the default web browser.
-          vim.fn.jobstart({ "open", url }) -- Mac OS
-          -- vim.fn.jobstart({"xdg-open", url})  -- linux
+          local os_name = vim.loop.os_uname().sysname
+          if os_name == "Linux" then
+            print("linux")
+            vim.fn.jobstart({ "xdg-open", url }) -- linux
+          else
+            print("macOS")
+            vim.fn.jobstart({ "open", url })   -- Mac OS
+          end
         end,
 
         -- Optional, set to true if you use the Obsidian Advanced URI plugin.
@@ -461,6 +467,9 @@ return {
 
       vim.keymap.set("n", "<leader>op", ":ObsidianFollowLink vsplit<CR>",
         { desc = "Obsidian - Open Link in vsplit" })
+
+      vim.keymap.set("n", "<leader>od", ":ObsidianDailies<CR>",
+        { desc = "[O]bsidian - [D]ailies" })
 
       vim.o.conceallevel = 2 -- Hide links in normal mode, show links in insert mode.
     end
