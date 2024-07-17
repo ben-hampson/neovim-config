@@ -314,7 +314,7 @@ return {
             vim.fn.jobstart({ "xdg-open", url }) -- linux
           else
             print("macOS")
-            vim.fn.jobstart({ "open", url })   -- Mac OS
+            vim.fn.jobstart({ "open", url }) -- Mac OS
           end
         end,
 
@@ -465,7 +465,13 @@ return {
 
       vim.keymap.set("n", "<leader>oo", ':ObsidianQuickSwitch<CR>', { desc = "[O]bsidian [O]pen (Quick Switcher)" })
 
-      vim.keymap.set("n", "<leader>op", ":ObsidianFollowLink vsplit<CR>",
+      vim.keymap.set("n", "<leader>op", function()
+          require("nvim-tree.api").tree.close()
+          vim.cmd("ObsidianFollowLink vsplit")
+          vim.wait(500)
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-w>', true, true, true), 'n', true)
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-r>', true, true, true), 'n', true)
+        end,
         { desc = "Obsidian - Open Link in vsplit" })
 
       vim.keymap.set("n", "<leader>od", ":ObsidianDailies<CR>",
