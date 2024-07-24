@@ -23,6 +23,7 @@ return {
         "lua_ls",
         "terraformls",
         "yamlls",
+        "bashls",
       },
     }
   },
@@ -105,6 +106,9 @@ return {
         capabilities = capabilities
       })
       lspconfig.yamlls.setup({
+        capabilities = capabilities
+      })
+      lspconfig.bashls.setup({
         capabilities = capabilities
       })
 
