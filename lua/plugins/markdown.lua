@@ -73,7 +73,8 @@ function fetch_field_from_jira(ppo_num, field)
 
   local curl = require('plenary.curl')
 
-  local base_url = "https://jira.finods.com/rest/api/2/issue/PPO-"
+  local jira_domain = os.getenv("JIRA_DOMAIN")
+  local base_url = "https://" .. jira_domain .. "/rest/api/2/issue/PPO-"
   local full_url = base_url .. ppo_num
 
   local response = curl.get(full_url, {
@@ -459,7 +460,7 @@ return {
       vim.keymap.set("v", "<leader>oe", ':ObsidianExtractNote<CR>',
         { silent = true, noremap = true, desc = "[O]bsidian [E]xtract to new note" })
 
-      vim.keymap.set("n", "<leader>nn", createNoteWithDefaultTemplate, { desc = "[N]ew Obsidian [N]ote" })
+      vim.keymap.set("n", "<leader>nn", createNoteWithDefaultTemplate, { desc = "[N]ew Obsidian [N]ote from template" })
 
       vim.keymap.set("n", "<leader>nj", createJiraTicketNote, { desc = "[N]ew Obsidian [J]ira Ticket Note" })
 
