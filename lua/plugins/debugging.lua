@@ -6,7 +6,7 @@ return
     dependencies = {
       "rcarriga/nvim-dap-ui",
       "mfussenegger/nvim-dap-python",
-      "theHamsta/nvim-dap-virtual-text", -- Show variable values and types inline.
+      -- "theHamsta/nvim-dap-virtual-text", -- Show variable values and types inline.
       "nvim-neotest/nvim-nio",
     },
     config = function()
@@ -152,7 +152,7 @@ return
         'DapBlue'
       })
 
-      require("nvim-dap-virtual-text").setup()
+      -- require("nvim-dap-virtual-text").setup()
     end
   },
 
