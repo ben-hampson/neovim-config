@@ -24,6 +24,7 @@ return {
         "terraformls",
         "yamlls",
         "bashls",
+        -- "beautysh", -- Can't be auto-installed, perhaps because it's not an LSP
       },
     }
   },
@@ -111,6 +112,9 @@ return {
       lspconfig.bashls.setup({
         capabilities = capabilities
       })
+      lspconfig.beautysh.setup({
+        capabilities = capabilities
+      })
 
       -- Global mappings.
       -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -161,7 +165,7 @@ return {
       vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
         callback = function()
           local clients = vim.lsp.get_active_clients()
-          if #clients > 0 then
+          if #clients > 0 and vim.bo.filetype ~= "yaml" then
             vim.lsp.buf.format()
           end
         end
