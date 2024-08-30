@@ -478,6 +478,9 @@ return {
       vim.keymap.set("n", "<leader>od", ":ObsidianDailies<CR>",
         { desc = "[O]bsidian - [D]ailies" })
 
+      vim.keymap.set("n", "<leader>ob", ":ObsidianBacklinks<CR>",
+        { desc = "[O]bsidian - [B]acklinks" })
+
       vim.o.conceallevel = 2 -- Hide links in normal mode, show links in insert mode.
     end
   }
