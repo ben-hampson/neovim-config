@@ -56,3 +56,6 @@ vim.opt.shiftwidth = 4
 
 -- Set conceal level for the sake of mkdnflow.nvim and obsidian.nvim
 vim.opt_local.conceallevel = 2
+
+-- Turn off swap files to prevent annoying error.
+vim.opt.swapfile = false
