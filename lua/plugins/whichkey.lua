@@ -3,10 +3,10 @@ return {
     {
         'folke/which-key.nvim',
         config = {
-            triggers_blacklist = {
-                i = { "f" },
-                v = { "f" }
-            },
+            -- triggers_blacklist = {
+            --     i = { "f" },
+            --     v = { "f" }
+            -- },
         }
     }
 }
