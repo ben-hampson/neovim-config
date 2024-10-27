@@ -67,6 +67,41 @@ local function createJiraTicketNote()
   obsidian:open_note(note, { sync = true })
 end
 
+local function addMyTimeFields()
+  --- add project, etc. based on inputted JIRA ticket
+  local utils = require("obsidian.util")
+  local jira_domain = os.getenv("JIRA_DOMAIN")
+
+  local base_url = "https://" .. jira_domain .. "/browse/PPO-"
+
+  -- local full_title = "PPO-" .. ppo_num .. " - " .. ticket_name
+
+  local current_line = vim.api.nvim_get_current_line()
+  -- Search for "PPO-" followed by 5 digits
+  local ppo_match = current_line:match("PPO%-(%d%d%d%d%d)")
+  if ppo_match then
+    -- print("Found PPO number: ", ppo_match)
+    PPO_num = ppo_match
+  else
+    PPO_num = utils.input("Ticket number: ")
+  end
+
+  local ticket_name = fetch_field_from_jira(PPO_num, "summary")
+  local time_code = fetch_field_from_jira(PPO_num, "customfield_23252")[1]
+  local time_code = string.sub(time_code, 1, 6)
+
+  local lines = {
+    "project: " .. time_code,
+    "hours: 1"
+  }
+
+
+  local buf = vim.api.nvim_get_current_buf()
+  local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+  vim.api.nvim_buf_set_lines(buf, row, row, false, lines)
+end
+
+
 function fetch_field_from_jira(ppo_num, field)
   local jiraPAT = os.getenv("JIRA_PAT")
   local auth_string = "Bearer " .. jiraPAT
@@ -463,6 +498,8 @@ return {
       vim.keymap.set("n", "<leader>nn", createNoteWithDefaultTemplate, { desc = "[N]ew Obsidian [N]ote from template" })
 
       vim.keymap.set("n", "<leader>nj", createJiraTicketNote, { desc = "[N]ew Obsidian [J]ira Ticket Note" })
+
+      vim.keymap.set({ "n", "i" }, "<leader>nk", addMyTimeFields, { desc = "Insert MyTime fields for a PPO ticket." })
 
       vim.keymap.set("n", "<leader>oo", ':ObsidianQuickSwitch<CR>', { desc = "[O]bsidian [O]pen (Quick Switcher)" })
 
