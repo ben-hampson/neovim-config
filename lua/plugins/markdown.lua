@@ -82,6 +82,7 @@ local function addMyTimeFields()
   if ppo_match then
     -- print("Found PPO number: ", ppo_match)
     PPO_num = ppo_match
+    New_entry = false
   else
     PPO_num = utils.input("Ticket number: ")
     New_entry = true
