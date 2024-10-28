@@ -84,6 +84,7 @@ local function addMyTimeFields()
     PPO_num = ppo_match
   else
     PPO_num = utils.input("Ticket number: ")
+    New_entry = true
   end
 
   local ticket_name = fetch_field_from_jira(PPO_num, "summary")
@@ -92,9 +93,15 @@ local function addMyTimeFields()
 
   local lines = {
     "project: " .. time_code,
+    "project name: ",
+    "task number: ",
     "hours: 1"
   }
 
+  if New_entry then
+    local heading = "## PPO-" .. PPO_num .. " - " .. ticket_name
+    table.insert(lines, 1, heading)
+  end
 
   local buf = vim.api.nvim_get_current_buf()
   local row, col = unpack(vim.api.nvim_win_get_cursor(0))
