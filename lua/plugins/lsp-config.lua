@@ -19,12 +19,13 @@ return {
 
         -- "pyright",  -- Python: go to definition, references, show function signature in hover
         "pylsp",
-        "ruff_lsp", -- Python: Used by none-ls -> Formatting, linting
+        "ruff", -- Python: Used by none-ls -> Formatting, linting
         "lua_ls",
         "terraformls",
         "yamlls",
         "bashls",
-        -- "beautysh", -- Can't be auto-installed, perhaps because it's not an LSP
+        "json-lsp",
+        "black"
       },
     }
   },
@@ -79,18 +80,23 @@ return {
       lspconfig.pylsp.setup({
         capabilities = capabilities,
         -- capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-        -- settings = {
-        --   pylsp = {
-        --     plugins = {
-        --       jedi_completion = {
-        --         include_params = true,
-        --       },
-        --     },
-        --   },
-        -- },
+        settings = {
+          pylsp = {
+            plugins = {
+              black = {
+                enabled = true,
+                line_length = 88
+              },
+              pycodestyle = { enabled = false },
+              --       jedi_completion = {
+              --         include_params = true,
+              -- },
+            },
+          },
+        },
       })
 
-      lspconfig.ruff_lsp.setup({
+      lspconfig.ruff.setup({
         capabilities = capabilities
       })
       lspconfig.lua_ls.setup({
@@ -112,7 +118,10 @@ return {
       lspconfig.bashls.setup({
         capabilities = capabilities
       })
-      lspconfig.beautysh.setup({
+      -- lspconfig.beautysh.setup({
+      --   capabilities = capabilities
+      -- })
+      lspconfig.jsonls.setup({
         capabilities = capabilities
       })
 

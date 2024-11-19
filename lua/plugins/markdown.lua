@@ -507,7 +507,7 @@ return {
 
       vim.keymap.set("n", "<leader>nj", createJiraTicketNote, { desc = "[N]ew Obsidian [J]ira Ticket Note" })
 
-      vim.keymap.set({ "n", "i" }, "<leader>nk", addMyTimeFields, { desc = "Insert MyTime fields for a PPO ticket." })
+      vim.keymap.set("n", "<leader>nk", addMyTimeFields, { desc = "Insert MyTime fields for a PPO ticket." })
 
       vim.keymap.set("n", "<leader>oo", ':ObsidianQuickSwitch<CR>', { desc = "[O]bsidian [O]pen (Quick Switcher)" })
 
