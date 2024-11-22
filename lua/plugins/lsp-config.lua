@@ -24,8 +24,8 @@ return {
         "terraformls",
         "yamlls",
         "bashls",
-        "json-lsp",
-        "black"
+        -- "json-lsp",
+        -- "black"
       },
     }
   },
