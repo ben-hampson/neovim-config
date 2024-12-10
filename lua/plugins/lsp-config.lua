@@ -174,7 +174,7 @@ return {
       vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
         callback = function()
           local clients = vim.lsp.get_active_clients()
-          if #clients > 0 and vim.bo.filetype ~= "yaml" and vim.bo.filetype ~= "md" then
+          if #clients > 0 and vim.bo.filetype ~= "yaml" and vim.bo.filetype ~= "md" and vim.bo.filetype ~= "markdown" then
             vim.lsp.buf.format()
           end
         end
