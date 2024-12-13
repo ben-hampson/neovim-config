@@ -362,6 +362,13 @@ return {
           end
         end,
 
+        ---@param img string
+        follow_img_func = function(img)
+          -- vim.fn.jobstart { "qlmanage", "-p", img }  -- Mac OS quick look preview
+          vim.fn.jobstart({ "xdg-open", img }) -- linux
+          -- vim.cmd(':silent exec "!start ' .. url .. '"') -- Windows
+        end,
+
         -- Optional, set to true if you use the Obsidian Advanced URI plugin.
         -- https://github.com/Vinzent03/obsidian-advanced-uri
         use_advanced_uri = false,
