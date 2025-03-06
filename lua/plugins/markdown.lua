@@ -135,7 +135,6 @@ end
 
 return {
   {
-
     'jakewvincent/mkdnflow.nvim',
     config = function()
       require('mkdnflow').setup({
@@ -164,7 +163,7 @@ return {
           -- MkdnNewListItem = {'i', '<CR>'} -- Use this command instead if you only want <CR> in
           -- insert mode to add a new list item (and behave as usual outside of lists).
           MkdnEnter = false, -- Let obsidian.nvim handle smart enter in normal mode: toggle checkboxes, follow links.
-          MkdnNewListItem = { 'i', '<CR>' },
+          -- MkdnNewListItem = { 'i', '<CR>' },
           MkdnIncreaseHeading = { 'n', '+' },
           MkdnDecreaseHeading = { 'n', '-' },
           MkdnTab = { 'n', '<Tab>' },
