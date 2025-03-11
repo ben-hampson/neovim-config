@@ -12,11 +12,15 @@ return {
         changedelete = { text = '~' },
       },
       on_attach = function(bufnr)
-        vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk,
-          { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
-        vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk, { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
-        vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk, { buffer = bufnr, desc = '[P]review [H]unk' })
+        vim.keymap.set('n', '<leader>ghp', require('gitsigns').prev_hunk,
+          { buffer = bufnr, desc = '[G]it [H]unk [P]revious' })
+        vim.keymap.set('n', '<leader>ghn', require('gitsigns').next_hunk,
+          { buffer = bufnr, desc = '[G]it [H]unk [N]ext' })
+        vim.keymap.set('n', '<leader>ghh', require('gitsigns').preview_hunk,
+          { buffer = bufnr, desc = '[G]it [H]unk Preview' })
         vim.keymap.set('n', '<leader>gb', require('gitsigns').blame, { buffer = bufnr, desc = '[G]it [B]lame' })
+        vim.keymap.set('n', '<leader>ghr', require('gitsigns').reset_hunk,
+          { buffer = bufnr, desc = '[G]it [H]unk [R]eset' })
       end,
     },
     version = "*"
