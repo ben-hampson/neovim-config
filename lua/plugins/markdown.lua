@@ -160,7 +160,9 @@ return {
           -- MkdnEnter = { { 'n', 'v' }, '<CR>' }, -- This monolithic command has the aforementioned
           -- insert-mode-specific behavior and also will trigger row jumping in tables. Outside
           -- of lists and tables, it behaves as <CR> normally does.
-          -- MkdnNewListItem = {'i', '<CR>'} -- Use this command instead if you only want <CR> in
+          -- Using Enter for MkdnNewListItem doesn't work with with espanso on wayland. When expanding multi-line snippets,
+          -- it creates a new line at the wrong point.
+          -- MkdnNewListItem = { 'i', '<CR>' }, -- Use this command instead if you only want <CR> in
           -- insert mode to add a new list item (and behave as usual outside of lists).
           MkdnEnter = false, -- Let obsidian.nvim handle smart enter in normal mode: toggle checkboxes, follow links.
           -- MkdnNewListItem = { 'i', '<CR>' },
