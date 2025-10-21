@@ -5,7 +5,7 @@ return
     'mfussenegger/nvim-dap',
     dependencies = {
       "rcarriga/nvim-dap-ui",
-      "mfussenegger/nvim-dap-python",
+      -- "mfussenegger/nvim-dap-python",
       -- "theHamsta/nvim-dap-virtual-text", -- Show variable values and types inline.
       "nvim-neotest/nvim-nio",
     },
@@ -159,13 +159,14 @@ return
   -- Provides a DAP config to nvim-dap to connect nvim-dap to the debupy debugger.
   -- debugpy will automatically pick-up a virtual environment if it is activated
   -- before neovim is started.
-  {
-    'mfussenegger/nvim-dap-python',
-    config = function()
-      require('dap-python').setup('~/.virtualenvs/debugpy/bin/python') -- Uses this virtualenv containing debugpy unless it picks up a virtualenv that's already in use.
-      require('dap-python').test_runner = 'pytest'
-    end
-  },
+  -- 2025/10/21: Commenting out due to error about luarocks being missing, even though I have the "vhyrro/luarocks.nvim" plugin.
+  -- {
+  --   'mfussenegger/nvim-dap-python',
+  --   config = function()
+  --     require('dap-python').setup('~/.virtualenvs/debugpy/bin/python') -- Uses this virtualenv containing debugpy unless it picks up a virtualenv that's already in use.
+  --     require('dap-python').test_runner = 'pytest'
+  --   end
+  -- },
 
   {
     'rcarriga/nvim-dap-ui'
