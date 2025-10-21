@@ -23,7 +23,7 @@ return {
         "lua_ls",
         "terraformls",
         "yamlls",
-        "bashls",
+        "bashls"
         -- "json-lsp",
         -- "black"
       },
