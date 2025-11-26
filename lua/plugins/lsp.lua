@@ -1,5 +1,4 @@
 return {
-
   -- Installs LSPs automatically using Mason.
   -- Translates between lspconfig LSP names and Mason package names.
   -- Ensures LSPs have a good config to pass to the builtin Neovim LSP client.
@@ -12,8 +11,7 @@ return {
         -- For list of lspconfigs available -> ':h lspconfig-all'
 
         "pyright",  -- Python static type checker. go to definition, references, show function signature in hover etc.
-        -- "pylsp",
-        "ruff", -- Python: Used by none-ls. Linting and formatting.
+        -- "ruff", -- Python: Used by none-ls. Linting and formatting.
         "lua_ls",
         "terraformls",
         "yamlls",
@@ -38,37 +36,26 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      
+
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
       vim.lsp.config('*', {
         root_markers = { '.git' },
       })
 
-      -- vim.lsp.config('pylsp', {
-      --     capabilities = capabilities,
-      --     settings = {
-      --       pylsp = {
-      --         plugins = {
-      --           pycodestyle = {
-      --             ignore = {'W391'},
-      --             maxLineLength = 100
-      --           },
-      --           black = {
-      --             enabled = true,
-      --             line_length = 88
-      --           }
-      --         }
-      --       }
-      --     }
-      --   })
-        
+      vim.lsp.config('pyright', {
+        capabilities = capabilities,
+        settings = {
+          python = {
+          }
+        }
+      })
       vim.lsp.enable('pyright')
 
-      vim.lsp.config('ruff', {
-        capabilities = capabilities,
-        offset_encoding = { "utf-16" }  -- defaults to utf-8, which causes warnings
-      })
+      -- vim.lsp.config('ruff', {
+      --   capabilities = capabilities,
+      --   offset_encoding = "utf-16" -- defaults to utf-8, which causes warnings
+      -- })
 
       vim.lsp.config('lua_ls', {
         capabilities = capabilities,
