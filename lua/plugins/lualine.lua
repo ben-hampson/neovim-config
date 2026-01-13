@@ -6,7 +6,7 @@ return {
       options = {
         theme = "tokyonight",
         disabled_filetypes = { 'dapui_breakpoints', 'dapui_watches', 'dapui_stacks', 'dapui_scopes', 'dap-repl' },
-        ignore_focus = { 'dapui_breakpoints', 'dapui_watches', 'dapui_stacks', 'dapui_scopes', 'dap-repl', 'NvimTree' },
+        ignore_focus = { 'dapui_breakpoints', 'dapui_watches', 'dapui_stacks', 'dapui_scopes', 'dap-repl', 'NvimTree', 'Avante'},
       },
     },
   }
