@@ -11,6 +11,7 @@ return {
         -- Models: https://docs.github.com/en/copilot/concepts/billing/copilot-requests#model-multipliers
         -- model = "claude-sonnet-4.5",  -- 1x multiplier
         model = "gpt-5.1",  -- 0.33x multipler
+        -- model = "auto",
         -- timeout = 30000, -- Timeout in milliseconds
         -- extra_request_body = {
         --   temperature = 0.75,
