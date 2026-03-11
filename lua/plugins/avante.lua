@@ -10,7 +10,9 @@ return {
         -- endpoint = "https://api.anthropic.com",
         -- Models: https://docs.github.com/en/copilot/concepts/billing/copilot-requests#model-multipliers
         -- model = "claude-sonnet-4.5",  -- 1x multiplier
-        model = "gpt-5.1",  -- 0.33x multipler
+        model = "gpt-5-mini",  -- Free
+        -- model = "claude-opus-4.6",  -- 3x multiplier, best ofr coding
+        -- model = "gpt-5.1",  -- 0.33x multipler
         -- model = "auto",
         -- timeout = 30000, -- Timeout in milliseconds
         -- extra_request_body = {
