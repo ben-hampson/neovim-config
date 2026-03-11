@@ -100,9 +100,6 @@ return
         -- nvim_tree_api.tree.open()
       end
 
-      -- By default, load .vscode/launch.json as the project debugging configuration. require('vim-tmux-navigator').setup()
-      require('dap.ext.vscode').load_launchjs(nil, {})
-
       -- Debugging Keymaps
       vim.keymap.set('n', '<C-b>', dap.toggle_breakpoint, { silent = true, desc = "Debug: Toggle [B]reakpoint" })
       vim.keymap.set('n', '<C-n>', function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end,
