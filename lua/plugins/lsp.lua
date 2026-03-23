@@ -73,6 +73,7 @@ return {
         -- https://www.arthurkoziel.com/json-schemas-in-neovim/
         settings = {
           yaml = {
+            -- TODO: Make keymap to toggle validation
             validate = true,
             schemaStore = {
               enable = true,
