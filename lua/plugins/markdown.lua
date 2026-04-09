@@ -154,7 +154,7 @@ return {
           paths = true,
           tables = false,
           yaml = false,
-          cmp = false
+          completion = false
         },
         mappings = {
           -- MkdnEnter = { { 'n', 'v' }, '<CR>' }, -- This monolithic command has the aforementioned
