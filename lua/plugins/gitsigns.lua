@@ -18,6 +18,8 @@ return {
           { buffer = bufnr, desc = '[G]it [H]unk [N]ext' })
         vim.keymap.set('n', '<leader>ghh', require('gitsigns').preview_hunk,
           { buffer = bufnr, desc = '[G]it [H]unk Preview' })
+        vim.keymap.set('n', '<leader>ghs', require('gitsigns').stage_hunk,
+          { buffer = bufnr, desc = '[G]it [H]unk [S]tage' })
         vim.keymap.set('n', '<leader>gb', require('gitsigns').blame_line, { buffer = bufnr, desc = '[G]it [B]lame' })
         vim.keymap.set('n', '<leader>ghr', require('gitsigns').reset_hunk,
           { buffer = bufnr, desc = '[G]it [H]unk [R]eset' })
