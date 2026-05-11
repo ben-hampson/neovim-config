@@ -52,6 +52,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- Theming
 vim.cmd [[colorscheme tokyonight]]
 vim.o.background = "dark"
+vim.o.winborder = "rounded"
 
 -- bufferline
 require("bufferline").setup({
@@ -75,5 +76,3 @@ require('gitsigns').setup()
 
 -- Setup neovim lua configuration
 -- require('neodev').setup()
-
-
