@@ -32,3 +32,11 @@ vim.keymap.set('n', "<C-E>", ":NvimTreeToggle<CR>", { silent = true, desc = "Nvi
 
 -- Remap because we want <C-k> for moving the cursor up one window
 vim.keymap.set('n', "<C-m>", vim.lsp.buf.signature_help, { silent = true, desc = "Signature Help" })
+
+-- Wrap, NoWrap
+vim.keymap.set('n', "<leader>bw", ":windo set wrap<CR>", { silent = true, desc = "[B]uffer [W]rap" })
+vim.keymap.set('n', "<leader>bW", ":windo set nowrap<CR>", { silent = true, desc = "[B]uffer [N]o [W]rap" })
+
+-- \n -> actual new lines 
+vim.keymap.set('n', "<leader>lj", [[:s/\\n/\r/g<CR>]], { silent = true, desc = "[L]ine - \\n -> New lines" })
+vim.keymap.set('v', "<leader>lk", [[:s/\n/\\n/g<CR>]], { silent = true, desc = "[L]ine - New lines -> \\n" })
