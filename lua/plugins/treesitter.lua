@@ -6,6 +6,7 @@
 return {
   {
     'nvim-treesitter/nvim-treesitter',
+    lazy = false,
     build = ':TSUpdate',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
@@ -15,10 +16,20 @@ return {
       config.setup({
         auto_install = true, -- Auto install parsers when opening a file
         highlight = {
-          enable = true
+          enable = true,
+          disable = function(_, buf)
+            local ft = vim.bo[buf].filetype
+            return ft == "Avante"
+              or ft == "AvanteInput"
+              or ft == "AvanteSelectedFiles"
+              or ft == "AvantePromptInput"
+              or ft == "AvanteTodo"
+              or ft == "AvanteTodos"
+          end,
         },
         indent = {
-          enable = true
+          enable = true,
+          disable = { "yaml" }
         },
         incremental_selection = {
           enable = true,

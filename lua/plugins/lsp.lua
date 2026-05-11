@@ -15,7 +15,7 @@ return {
         "lua_ls",
         "terraformls",
         "yamlls",
-        "bashls"
+        "bashls",  -- Bash LSP
         -- "json-lsp",
         -- "black"
       },
@@ -28,6 +28,20 @@ return {
     "williamboman/mason.nvim",
     config = true,
   },
+
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    opts = {
+      ensure_installed = {
+        "shellcheck",
+      },
+      auto_update = false,
+      run_on_start = true,
+      start_delay = 3000,
+      debounce_hours = 24,
+    },
+  },
+
 
   -- nvim-lspconfig is a collection of configs for the Nvim LSP Client.
   -- These configs enable the built-in Nvim LSP Client to connect to the language servers.
@@ -61,12 +75,16 @@ return {
         capabilities = capabilities,
         settings = {
           Lua = {
+            diagnostics = {
+              globals = { 'vim' },
+            },
             completion = {
               callSnippet = "Replace"
             }
           }
         }
       })
+      vim.lsp.enable('lua_ls')
 
       vim.lsp.config('yamlls', {
         capabilities = capabilities,
@@ -85,7 +103,7 @@ return {
               ['https://raw.githubusercontent.com/docker/compose/master/compose/config/compose_spec.json'] =
               'docker-compose*.{yml,yaml}',
               ["https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/argoproj.io/application_v1alpha1.json"] =
-              "*.{yml,yaml}",
+              "argocd-application*.{yml,yaml}",
             },
             format = {
               enable = false
@@ -95,14 +113,17 @@ return {
           }
         }
       })
+      vim.lsp.enable('yamlls')
 
       vim.lsp.config('bashls', {
         capabilities = capabilities
       })
+      vim.lsp.enable('bashls')
 
       vim.lsp.config('jsonls', {
         capabilities = capabilities
       })
+      vim.lsp.enable('jsonls')
 
       -- Global mappings.
       -- See `:help vim.diagnostic.*` for documentation on any of the below functions

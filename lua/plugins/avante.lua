@@ -27,6 +27,9 @@ return {
         --   max_tokens = 20480,
         },
       },
+    selection = {
+      enabled = false,
+    },
     },
     dependencies = {
       "nvim-lua/plenary.nvim",

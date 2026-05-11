@@ -1,0 +1,25 @@
+return {}
+-- return {
+--   {
+--     "stevearc/conform.nvim",
+--     opts = function()
+--       local opts = {
+--         formatters_by_ft = {
+--           markdown = { "mdformat" },
+--         },
+--         formatters = {
+--           mdformat = {
+--             command = "mdformat",
+--           },
+--           injected = { options = { ignore_errors = true } },
+--         },
+--         format_on_save = {
+--           -- These options will be passed to conform.format()
+--           timeout_ms = 500,
+--           lsp_format = "fallback",
+--         },
+--       }
+--       return opts
+--     end,
+--   },
+-- }
