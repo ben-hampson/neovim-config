@@ -6,14 +6,14 @@ return {
       enabled = false,
     },
     suggestion = {
-      enabled = false,
+      enabled = true,
       auto_trigger = true,
       hide_during_completion = false,
       keymap = {
-        accept = '<C-u>',
+        accept = '<tab>',
         accept_word = false,
         accept_line = false,
-        dismiss = "<C-]>",
+        dismiss = "<esc>",
       },
     copilot_model = "",
     },
