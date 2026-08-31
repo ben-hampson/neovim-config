@@ -40,3 +40,6 @@ vim.keymap.set('n', "<leader>bW", ":windo set nowrap<CR>", { silent = true, desc
 -- \n -> actual new lines 
 vim.keymap.set('n', "<leader>lj", [[:s/\\n/\r/g<CR>]], { silent = true, desc = "[L]ine - \\n -> New lines" })
 vim.keymap.set('v', "<leader>lk", [[:s/\n/\\n/g<CR>]], { silent = true, desc = "[L]ine - New lines -> \\n" })
+
+-- Reload config
+vim.api.nvim_set_keymap("n", "<leader>rc", "<cmd>lua ReloadConfig()<CR>", { noremap = true, silent = false })
