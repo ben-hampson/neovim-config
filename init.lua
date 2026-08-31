@@ -7,6 +7,8 @@ vim.g.loaded_netrwPlugin = 1
 require("options")
 --  Keymaps must be loaded before plugins are required. Otherwise wrong leader will be used.
 require("keymaps")
+-- Shortcut to reload the config without restarting nvim
+require("reload")
 
 -- Install package manager if not already installed
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
