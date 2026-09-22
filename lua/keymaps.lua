@@ -26,6 +26,7 @@ vim.keymap.set('n', "<leader>b2n", ":bn 2<CR>", { silent = true, desc = "[B]uffe
 vim.keymap.set('n', "<leader>bp", ":bp<CR>", { silent = true, desc = "[B]uffer [P]revious" })
 vim.keymap.set('n', "<leader>b2p", ":bp 2<CR>", { silent = true, desc = "[B]uffer [P]revious 2" })
 vim.keymap.set('n', "<leader>bq", ":Bdelete<CR>", { silent = true, desc = "[B]uffer [Q]uit" })
+vim.keymap.set('n', "<leader>bo", ":BufferLineCloseOthers<CR>", { silent = true, desc = "[B]uffer [O]nly" })
 
 -- NvimTree Toggle
 vim.keymap.set('n', "<C-E>", ":NvimTreeToggle<CR>", { silent = true, desc = "NvimTree Toggle" })
